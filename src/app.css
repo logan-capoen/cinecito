@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@theme {
+  --color-night: #1a1020;
+  --color-velvet: #2a1733;
+  --color-rosa: #ff4f8b;
+  --color-marigold: #ffb627;
+  --color-verde: #2ec4a0;
+  --color-crema: #fff4e0;
+  --font-display: "Georgia", "Times New Roman", serif;
+}
+
+html {
+  color-scheme: dark;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply bg-night text-crema min-h-dvh antialiased;
+  overscroll-behavior-y: none;
+}
+
+/* Halo de couleurs fixe — via un pseudo-élément car background-attachment: fixed est cassé sur iOS */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    radial-gradient(circle at 15% 0%, rgb(255 79 139 / 0.18), transparent 40%),
+    radial-gradient(circle at 85% 10%, rgb(255 182 39 / 0.14), transparent 40%);
+}
+
+/* 16px minimum : sinon iOS zoome automatiquement quand on touche un champ */
+input,
+select,
+textarea {
+  @apply rounded-xl border border-white/10 bg-white/5 px-3 py-2.5 text-base text-crema placeholder:text-crema/40 focus:border-rosa focus:outline-none;
+}
+
+select {
+  @apply appearance-none bg-no-repeat pr-9;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%23fff4e0' opacity='.5'%3E%3Cpath d='M5.5 7.5 10 12l4.5-4.5'  stroke='%23fff4e0' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+  background-position: right 0.75rem center;
+  background-size: 1.1rem;
+}
+
+select option {
+  @apply bg-velvet text-crema;
+}
+
+button {
+  cursor: pointer;
+  touch-action: manipulation;
+}
